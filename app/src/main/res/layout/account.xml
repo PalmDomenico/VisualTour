@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- FILE XML DOVE CI SARANNO I DATI DELLA PERSONA, QUINDI POTRESTI METTERE DEI COSI DOVE POI CI VANNO I DATI -->
+<!-- FILE prova XML DOVE CI SARANNO I DATI DELLA PERSONA, QUINDI POTRESTI METTERE DEI COSI DOVE POI CI VANNO I DATI -->
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
