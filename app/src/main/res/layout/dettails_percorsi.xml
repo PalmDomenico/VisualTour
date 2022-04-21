@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- QUESTA è LA PARTE CHE VIENE VISUALIZZATA NELL'ADDPERCORSI AL POSTO DEL RELATIVEVIEW
+     DOPO CHE L'UTENTE HA PREMUTO SU INVIA PER INSERIRE IL NOME E LA DESCRIZIONE DEL PERCORSO-->
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="467dp">
+
+            <EditText
+                android:id="@+id/editPersonName"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="74dp"
+                android:layout_marginTop="120dp"
+                android:background="#30ffffff"
+                android:backgroundTint="@android:color/white"
+                android:ems="10"
+                android:hint="Nome percorso"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editDescrizione"
+                android:layout_width="260dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="36dp"
+                android:layout_marginEnd="74dp"
+                android:background="#30ffffff"
+                android:backgroundTint="@android:color/white"
+                android:ems="10"
+                android:hint="Descrizione"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColorHint="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editPersonName" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="84dp"
+                android:layout_marginBottom="40dp"
+                android:text="Inserisci gli ultimi dati"
+                android:textColor="@color/white"
+                android:textSize="24dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/editPersonName"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

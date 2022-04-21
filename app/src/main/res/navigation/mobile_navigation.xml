@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/homeMappa">
+
+    <fragment
+        android:id="@+id/homeMappa"
+        android:name="com.example.VisualTour.Main.HomeMappa"
+        android:label="@layout/home_mappa" />
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.VisualTour.Accesso.Login"
+        android:label="login"
+        tools:layout="@layout/login" >
+        <action
+            android:id="@+id/action_login_to_registrazione"
+            app:destination="@id/registrazione" />
+        <action
+            android:id="@+id/action_login_to_account"
+            app:destination="@id/account" />
+        <action
+            android:id="@+id/action_login_to_privatePOI"
+            app:destination="@id/privatePOI" />
+        <action
+            android:id="@+id/action_login_to_privateMap"
+            app:destination="@id/privateMap" />
+        <action
+            android:id="@+id/action_login_to_publicPOI"
+            app:destination="@id/publicPOI" />
+    </fragment>
+    <fragment
+        android:id="@+id/registrazione"
+        android:name="com.example.VisualTour.Accesso.Registrazione"
+        android:label="registrazione"
+        tools:layout="@layout/registrazione" >
+        <action
+            android:id="@+id/action_registrazione_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/privateMap"
+        android:name="com.example.VisualTour.Percorsi.PrivateMap"
+        android:label="private_map"
+        tools:layout="@layout/private_map" >
+        <action
+            android:id="@+id/action_privateMap_to_publicMap"
+            app:destination="@id/publicMap" />
+        <action
+            android:id="@+id/action_privateMap_to_add2"
+            app:destination="@id/add2" />
+    </fragment>
+    <fragment
+        android:id="@+id/publicMap"
+        android:name="com.example.VisualTour.Percorsi.PublicMap"
+        android:label="public_map"
+        tools:layout="@layout/public_map" >
+        <action
+            android:id="@+id/action_publicMap_to_privateMap"
+            app:destination="@id/privateMap" />
+        <action
+            android:id="@+id/action_publicMap_to_login"
+            app:destination="@id/login" />
+        <action
+            android:id="@+id/action_publicMap_to_add2"
+            app:destination="@id/add2" />
+    </fragment>
+    <fragment
+        android:id="@+id/publicPOI"
+        android:name="com.example.VisualTour.POI.publicPOI"
+        android:label="publicPOI"
+        tools:layout="@layout/public_poi" >
+
+        <action
+            android:id="@+id/action_publicPOI_to_privatePOI"
+            app:destination="@id/privatePOI" />
+        <action
+            android:id="@+id/action_publicPOI_to_dettagli"
+            app:destination="@id/remove" />
+        <action
+            android:id="@+id/action_publicPOI_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/privatePOI"
+        android:name="com.example.VisualTour.POI.privatePOI"
+        android:label="privatePOI"
+        tools:layout="@layout/private_poi" >
+
+        <action
+            android:id="@+id/action_privatePOI_to_publicPOI"
+            app:destination="@id/publicPOI" />
+        <action
+            android:id="@+id/action_privatePOI_to_dettagli"
+            app:destination="@id/remove" />
+        <action
+            android:id="@+id/action_privatePOI_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/account"
+        android:name="com.example.VisualTour.Accesso.Account"
+        android:label="fragment_account"
+        tools:layout="@layout/account" >
+        <action
+            android:id="@+id/action_account_to_login"
+            app:destination="@id/login" />
+    </fragment>
+    <fragment
+        android:id="@+id/remove"
+        android:name="com.example.VisualTour.POI.DetailsPOI"
+        android:label="details_poi"
+        tools:layout="@layout/details_poi" >
+        <action
+            android:id="@+id/action_dettagli_to_publicPOI"
+            app:destination="@id/publicPOI" />
+    </fragment>
+    <fragment
+        android:id="@+id/add2"
+        android:name="com.example.VisualTour.Percorsi.Add"
+        android:label="addpercorsi"
+        tools:layout="@layout/addpercorsi" />
+
+</navigation>

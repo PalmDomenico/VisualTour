@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="254dp">
+    <!-- QUESTO FILE XML è UN FRAGMENT CHE VIENE MESSO NEL DETAILS_POI NEL MOMENTO IN CUI SI VOGLIONO VISUALIZZARE I DETTAGLI DI UN PUNTO
+      INFATTI IL TEXT VIEW ES.         android:id="@+id/DescrizioneMon" VIENE RIEMPITO CON I FILE PRESI DAL DATABASE.
+      QUI LO SFONDO METTILO INVISIBILE PERCHè POI QUANDO VIENE MESSO NEL DETAILS_POI STA LO SFONDO DI QUEL FRAGMENT-->
+
+    <TextView
+        android:id="@+id/NomeMon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="28dp"
+        android:text="Nome"
+        android:textColor="@color/white"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/TipoMon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="2dp"
+        android:text="Tipo"
+        android:textColor="#aaaaaa"
+        android:textSize="14dp"
+        android:textStyle="italic"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toBottomOf="@+id/NomeMon" />
+
+    <TextView
+        android:id="@+id/DescrizioneMon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:text="Descrizione"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toBottomOf="@+id/ComuneMon" />
+
+    <TextView
+        android:id="@+id/ProvinciaMon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Provincia"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        mapbox:layout_constraintStart_toEndOf="@+id/ComuneMon"
+        mapbox:layout_constraintTop_toTopOf="@+id/ComuneMon" />
+
+    <TextView
+        android:id="@+id/RegioneMon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Regione"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        mapbox:layout_constraintStart_toEndOf="@+id/ProvinciaMon"
+        mapbox:layout_constraintTop_toTopOf="@+id/ProvinciaMon" />
+
+    <TextView
+        android:id="@+id/ComuneMon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
+        android:text="Comune"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toBottomOf="@+id/TipoMon" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="|"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        mapbox:layout_constraintEnd_toStartOf="@+id/ProvinciaMon"
+        mapbox:layout_constraintStart_toEndOf="@+id/ComuneMon"
+        mapbox:layout_constraintTop_toTopOf="@+id/ComuneMon" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="|"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        mapbox:layout_constraintEnd_toStartOf="@+id/RegioneMon"
+        mapbox:layout_constraintStart_toEndOf="@+id/ProvinciaMon"
+        mapbox:layout_constraintTop_toTopOf="@+id/ProvinciaMon" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

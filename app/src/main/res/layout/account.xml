@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- FILE XML DOVE CI SARANNO I DATI DELLA PERSONA, QUINDI POTRESTI METTERE DEI COSI DOVE POI CI VANNO I DATI -->
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Accesso.Account">
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="250dp"
+        android:layout_height="112dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="Username"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/prova"
+        tools:layout_editor_absoluteX="80dp" />
+
+    <Button
+        android:id="@+id/Disconetti"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:text="Disconnect"
+        android:textColor="@color/green"
+        android:textSize="16dp"
+        tools:layout_editor_absoluteX="136dp"
+        tools:layout_editor_absoluteY="650dp" />
+
+    <ImageView
+        android:id="@+id/prova"
+        android:layout_width="250dp"
+        android:layout_height="112dp"
+        android:src="@drawable/account"
+        tools:layout_editor_absoluteX="81dp"
+        tools:layout_editor_absoluteY="34dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

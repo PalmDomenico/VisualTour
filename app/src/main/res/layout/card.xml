@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="1dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <!--
+FILE XML CONTENETE LA CARD CHE VIENE USATA SULLA PARTE DEI PUNTI DI INTERESSE, QUINDI QUESTA CARD VIENE USATA SOLO NELLA PARTE PUNTI DI INTERESSE
+    -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/item">
+
+        <!--ImageVIew to display our Course Image-->
+        <ImageView
+            android:id="@+id/idIVCourseImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icona_casa"
+            android:padding="5dp" />
+
+        <!--Text View to display Course Name-->
+        <TextView
+            android:id="@+id/NomePerc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/idIVCourseImage"
+            android:text="@string/course_name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!--Text VIew to display COurse Rating-->
+        <!--Image used in present in drawable folder-->
+
+        <TextView
+            android:id="@+id/Tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/NomePerc"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="9dp"
+            android:layout_toEndOf="@id/idIVCourseImage"
+            android:drawablePadding="2dp"
+            android:text="@string/course_rating" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

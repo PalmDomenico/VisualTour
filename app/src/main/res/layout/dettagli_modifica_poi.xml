@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dettagliView"
+    android:layout_width="match_parent"
+    android:layout_height="254dp"
+    android:background="@android:color/transparent">
+    <!-- STESSA COSA DEL DETTAGLI_DATI_POI SOLO CHE QUESTO VIENE USATO IN FASE DI MODIFICA O CREAZION DEL PUNTO DI INTERESSE,
+    ANCHE QUI METTI LO SFONDO INVISIBILE PERCHè VIENE SOSTITUITO AL DETAILS_POI E USA QUELLO SFONDO-->
+
+
+    <EditText
+        android:id="@+id/textName"
+        android:layout_width="275dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:background="#30ffffff"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:hint="Nome"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        mapbox:layout_constraintBottom_toTopOf="@+id/textTipo"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/textRegione"
+        android:layout_width="275dp"
+        android:layout_height="35dp"
+        android:background="#30ffffff"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:hint="Regione"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        android:visibility="visible"
+        mapbox:layout_constraintBottom_toTopOf="@+id/textProvincia"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toBottomOf="@+id/textComune" />
+
+    <EditText
+        android:id="@+id/textDescrizione"
+        android:layout_width="275dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="28dp"
+        android:background="#30ffffff"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:hint="Descrizione"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        android:visibility="visible"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toBottomOf="@+id/textProvincia" />
+
+    <EditText
+        android:id="@+id/textProvincia"
+        android:layout_width="275dp"
+        android:layout_height="35dp"
+        android:background="#30ffffff"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:hint="Provincia"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        android:visibility="visible"
+        mapbox:layout_constraintBottom_toTopOf="@+id/textDescrizione"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toBottomOf="@+id/textRegione" />
+
+    <EditText
+        android:id="@+id/textComune"
+        android:layout_width="275dp"
+        android:layout_height="35dp"
+        android:background="#30ffffff"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:hint="Comune"
+        android:textStyle="bold"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        android:visibility="visible"
+        mapbox:layout_constraintBottom_toTopOf="@+id/textRegione"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toBottomOf="@+id/textTipo" />
+
+    <EditText
+        android:id="@+id/textTipo"
+        android:layout_width="275dp"
+        android:layout_height="35dp"
+        android:background="#30ffffff"
+        android:backgroundTint="@android:color/white"
+        android:ems="10"
+        android:hint="Tipo"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColorHint="@color/white"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:visibility="visible"
+        mapbox:layout_constraintBottom_toTopOf="@+id/textComune"
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintTop_toBottomOf="@+id/textName" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    tools:context="HomeMappa">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/homeMappa"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Mappa" />
+        <item
+            android:id="@+id/login"
+            android:icon="@drawable/ic_menu_account"
+            android:title="Profilo" />
+        <item
+            android:id="@+id/publicMap"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Percorsi" />
+        <item
+            android:id="@+id/publicPOI"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Punti di interesse"
+             />
+    </group>
+</menu>

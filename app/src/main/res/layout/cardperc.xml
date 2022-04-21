@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true">
+
+    <!--
+FILE XML CONTENETE LA CARD CHE VIENE USATA SULLA PARTE DEI PERCORSI,
+QUINDI QUESTA CARD VIENE USATA SOLO NELLA PARTE DEI PERCORSI E CONTIENE I + E I - (I BOTTONI)
+CHE VENGONO MOSTRATI SOLO QUANDO SI STA CREANDO IL PERCORSO, QUANDO NON LO SI STA CREANDO E SI VISUALIZZA IL PERCORSO NORMALMENTE
+IL + E - VENGONO NASCOSTI
+    -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/item">
+
+        <!--ImageVIew to display our Course Image-->
+        <ImageView
+            android:id="@+id/idIVCourseImage"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/icona_casa"
+            android:padding="5dp" />
+
+        <!--Text View to display Course Name-->
+        <TextView
+            android:id="@+id/NomePerc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/idIVCourseImage"
+            android:text="@string/course_name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <!--Text VIew to display COurse Rating-->
+        <!--Image used in present in drawable folder-->
+
+        <TextView
+            android:id="@+id/Tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/NomePerc"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="9dp"
+            android:layout_toEndOf="@id/idIVCourseImage"
+            android:drawablePadding="2dp"
+            android:text="@string/course_rating" />
+
+        <Button
+            android:id="@+id/remove"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignTop="@+id/add"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="15dp"
+            android:backgroundTint="@color/shades2"
+            android:text="-"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/add"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="68dp"
+            android:layout_marginEnd="79dp"
+            android:backgroundTint="@color/green"
+            android:textColor="@color/white"
+            android:text="+" />
+
+        <TextView
+            android:id="@+id/ID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            tools:visibility="invisible" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
