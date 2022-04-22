@@ -61,7 +61,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * prova3
+ * prova
  * Example shows how Vision and VisionAR SDKs are used to draw AR lane over the video stream from camera.
  * Also, Mapbox navigation services are used to build route and  navigation session.
  */
