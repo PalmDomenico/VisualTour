@@ -3,21 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="532dp"
+    android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context=".Accesso.Login">
 
     <TextView
         android:id="@+id/textView7"
-        android:layout_width="341dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="26dp"
-        android:layout_marginBottom="193dp"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="103dp"
+        android:layout_marginEnd="34dp"
+        android:layout_marginBottom="450dp"
         android:text="Login to your Account"
         android:textColor="@color/white"
         android:textSize="50dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/Errori"
+        app:layout_constraintBottom_toTopOf="@+id/Registra"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,10 +27,8 @@
     <EditText
         android:id="@+id/UtenteBox"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="55dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
         android:background="#30ffffff"
         android:backgroundTint="@android:color/white"
         android:drawableLeft="@drawable/ic_person"
@@ -38,31 +38,18 @@
         android:padding="10dp"
         android:textColorHint="@color/white"
         android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/PasswordBox"
+        app:layout_constraintEnd_toEndOf="@+id/PasswordBox"
+        app:layout_constraintStart_toStartOf="@+id/PasswordBox"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-    <Button
-        android:id="@+id/Login"
-        android:layout_width="300dp"
-        android:layout_height="55dp"
-        android:layout_marginTop="32dp"
-        android:backgroundTint="@android:color/white"
-        android:text="Sing in"
-        android:textColor="@color/green"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/PasswordBox" />
 
     <EditText
         android:id="@+id/PasswordBox"
         android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="55dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="55dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="32dp"
         android:background="#30ffffff"
         android:backgroundTint="@android:color/white"
         android:drawableLeft="@drawable/ic_info"
@@ -73,37 +60,53 @@
         android:padding="10dp"
         android:textColorHint="@color/white"
         android:textSize="14dp"
+        app:layout_constraintBottom_toTopOf="@+id/Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/UtenteBox"
         app:passwordToggleEnabled="true" />
 
+    <Button
+        android:id="@+id/Login"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginEnd="53dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="@color/green"
+        android:text="Sing in"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/Errori"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PasswordBox" />
+
     <TextView
         android:id="@+id/Errori"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="161dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="102dp"
+        android:layout_marginBottom="171dp"
         android:textColor="@color/white"
         android:textSize="16dp"
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/Registra"
-        app:layout_constraintEnd_toEndOf="@+id/textView7"
-        app:layout_constraintStart_toStartOf="@+id/Login"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
+        android:layout_marginBottom="26dp"
         android:text="Don't have an account? "
         android:textColor="@color/white"
-        app:layout_constraintBaseline_toBaselineOf="@+id/Registra"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Registra"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Errori" />
 
     <TextView
         android:id="@+id/Registra"
@@ -116,7 +119,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/Errori" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
