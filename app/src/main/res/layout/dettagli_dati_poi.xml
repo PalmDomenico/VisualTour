@@ -14,93 +14,103 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
+        android:layout_marginBottom="29dp"
         android:text="Nome"
         android:textColor="@color/white"
         android:textSize="24dp"
         android:textStyle="bold"
+        mapbox:layout_constraintBottom_toTopOf="@+id/ComuneMon"
         mapbox:layout_constraintStart_toStartOf="parent"
         mapbox:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv"
+        android:layout_width="58dp"
+        android:layout_height="56dp"
+
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="16dp"
+        mapbox:layout_constraintBottom_toBottomOf="parent"
+        mapbox:layout_constraintEnd_toEndOf="parent" />
 
     <TextView
         android:id="@+id/TipoMon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="2dp"
         android:text="Tipo"
         android:textColor="#aaaaaa"
         android:textSize="14dp"
         android:textStyle="italic"
-        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintStart_toStartOf="@+id/NomeMon"
         mapbox:layout_constraintTop_toBottomOf="@+id/NomeMon" />
 
     <TextView
         android:id="@+id/DescrizioneMon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:layout_marginTop="8dp"
         android:text="Descrizione"
         android:textColor="@color/white"
         android:textSize="14dp"
-        mapbox:layout_constraintStart_toStartOf="parent"
+        mapbox:layout_constraintStart_toStartOf="@+id/ComuneMon"
         mapbox:layout_constraintTop_toBottomOf="@+id/ComuneMon" />
 
     <TextView
         android:id="@+id/ProvinciaMon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="3dp"
         android:text="Provincia"
         android:textColor="@color/white"
         android:textSize="16dp"
-        mapbox:layout_constraintStart_toEndOf="@+id/ComuneMon"
-        mapbox:layout_constraintTop_toTopOf="@+id/ComuneMon" />
+        mapbox:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+        mapbox:layout_constraintStart_toEndOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/RegioneMon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="3dp"
         android:text="Regione"
         android:textColor="@color/white"
         android:textSize="16dp"
-        mapbox:layout_constraintStart_toEndOf="@+id/ProvinciaMon"
-        mapbox:layout_constraintTop_toTopOf="@+id/ProvinciaMon" />
+        mapbox:layout_constraintBaseline_toBaselineOf="@+id/textView4"
+        mapbox:layout_constraintStart_toEndOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/ComuneMon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:text="Comune"
         android:textColor="@color/white"
         android:textSize="16dp"
-        mapbox:layout_constraintStart_toStartOf="parent"
-        mapbox:layout_constraintTop_toBottomOf="@+id/TipoMon" />
+        mapbox:layout_constraintBaseline_toBaselineOf="@+id/textView3"
+        mapbox:layout_constraintEnd_toStartOf="@+id/textView3" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="|"
-        android:textSize="16dp"
         android:textColor="@color/white"
-        mapbox:layout_constraintEnd_toStartOf="@+id/ProvinciaMon"
-        mapbox:layout_constraintStart_toEndOf="@+id/ComuneMon"
-        mapbox:layout_constraintTop_toTopOf="@+id/ComuneMon" />
+        android:textSize="16dp"
+        mapbox:layout_constraintBaseline_toBaselineOf="@+id/ProvinciaMon"
+        mapbox:layout_constraintEnd_toEndOf="@+id/NomeMon"
+        mapbox:layout_constraintStart_toEndOf="@+id/NomeMon" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="89dp"
         android:text="|"
-        android:textSize="16dp"
         android:textColor="@color/white"
-        mapbox:layout_constraintEnd_toStartOf="@+id/RegioneMon"
+        android:textSize="16dp"
         mapbox:layout_constraintStart_toEndOf="@+id/ProvinciaMon"
-        mapbox:layout_constraintTop_toTopOf="@+id/ProvinciaMon" />
+        mapbox:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
