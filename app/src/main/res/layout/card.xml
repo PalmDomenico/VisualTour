@@ -43,6 +43,7 @@ FILE XML CONTENETE LA CARD CHE VIENE USATA SULLA PARTE DEI PUNTI DI INTERESSE, Q
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/idIVCourseImage"
             android:text="@string/course_name"
+            android:fontFamily="@font/oceanwide_semibold"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -57,6 +58,7 @@ FILE XML CONTENETE LA CARD CHE VIENE USATA SULLA PARTE DEI PUNTI DI INTERESSE, Q
             android:layout_below="@id/NomePerc"
             android:layout_marginStart="22dp"
             android:layout_marginTop="9dp"
+            android:fontFamily="@font/oceanwide_semibold"
             android:layout_toEndOf="@id/idIVCourseImage"
             android:drawablePadding="2dp"
             android:text="@string/course_rating" />

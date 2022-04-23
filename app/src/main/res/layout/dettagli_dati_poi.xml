@@ -18,6 +18,7 @@
         android:text="Nome"
         android:textColor="@color/white"
         android:textSize="24dp"
+        android:fontFamily="@font/oceanwide_semibold"
         android:textStyle="bold"
         mapbox:layout_constraintBottom_toTopOf="@+id/ComuneMon"
         mapbox:layout_constraintStart_toStartOf="parent"
@@ -25,13 +26,12 @@
 
     <ImageView
         android:id="@+id/iv"
-        android:layout_width="58dp"
-        android:layout_height="56dp"
-
-        android:layout_marginEnd="137dp"
+        android:layout_width="355dp"
+        android:layout_height="52dp"
         android:layout_marginBottom="16dp"
         mapbox:layout_constraintBottom_toBottomOf="parent"
-        mapbox:layout_constraintEnd_toEndOf="parent" />
+        mapbox:layout_constraintEnd_toEndOf="parent"
+        mapbox:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/TipoMon"
@@ -41,6 +41,7 @@
         android:text="Tipo"
         android:textColor="#aaaaaa"
         android:textSize="14dp"
+        android:fontFamily="@font/oceanwide_semibold"
         android:textStyle="italic"
         mapbox:layout_constraintStart_toStartOf="@+id/NomeMon"
         mapbox:layout_constraintTop_toBottomOf="@+id/NomeMon" />
@@ -53,6 +54,7 @@
         android:text="Descrizione"
         android:textColor="@color/white"
         android:textSize="14dp"
+        android:fontFamily="@font/oceanwide_semibold"
         mapbox:layout_constraintStart_toStartOf="@+id/ComuneMon"
         mapbox:layout_constraintTop_toBottomOf="@+id/ComuneMon" />
 
@@ -64,6 +66,7 @@
         android:text="Provincia"
         android:textColor="@color/white"
         android:textSize="16dp"
+        android:fontFamily="@font/oceanwide_semibold"
         mapbox:layout_constraintBaseline_toBaselineOf="@+id/textView4"
         mapbox:layout_constraintStart_toEndOf="@+id/textView3" />
 
@@ -75,6 +78,7 @@
         android:text="Regione"
         android:textColor="@color/white"
         android:textSize="16dp"
+        android:fontFamily="@font/oceanwide_semibold"
         mapbox:layout_constraintBaseline_toBaselineOf="@+id/textView4"
         mapbox:layout_constraintStart_toEndOf="@+id/textView4" />
 
@@ -83,6 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="4dp"
+        android:fontFamily="@font/oceanwide_semibold"
         android:text="Comune"
         android:textColor="@color/white"
         android:textSize="16dp"

@@ -46,6 +46,7 @@ IL + E - VENGONO NASCOSTI
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_toEndOf="@id/idIVCourseImage"
+            android:fontFamily="@font/oceanwide_semibold"
             android:text="@string/course_name"
             android:textColor="@color/black"
             android:textSize="18sp"
@@ -61,6 +62,7 @@ IL + E - VENGONO NASCOSTI
             android:layout_below="@id/NomePerc"
             android:layout_marginStart="22dp"
             android:layout_marginTop="9dp"
+            android:fontFamily="@font/oceanwide_semibold"
             android:layout_toEndOf="@id/idIVCourseImage"
             android:drawablePadding="2dp"
             android:text="@string/course_rating" />
