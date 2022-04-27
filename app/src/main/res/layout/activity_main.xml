@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity"
-    android:background="@drawable/background">
+    android:background="@drawable/background"
+    >
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"

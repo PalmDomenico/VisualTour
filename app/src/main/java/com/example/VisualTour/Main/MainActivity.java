@@ -41,18 +41,17 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.appBarMain.toolbar);
 
-         ActionBar actionBar = getSupportActionBar();
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setDisplayShowHomeEnabled(false);
-        //actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.title_bar_gray)));
-        actionBar.setTitle("heading");
-        actionBar.show();
+        getSupportActionBar().setDisplayOptions(ActionBar. DISPLAY_SHOW_CUSTOM);
+        Source: https://frameboxxindore.com/android/how-can-change-action-bar-title-in-android-programmatically.html
+        getSupportActionBar(). setDisplayShowCustomEnabled(true);
+
+        getSupportActionBar().setTitle("wffffffffffff");
 
 
 
 
-         DrawerLayout drawer = binding.drawerLayout;
+
+        DrawerLayout drawer = binding.drawerLayout;
         navigationView = binding.navView;
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                R.id.homeMappa,R.id.publicMap,R.id.publicPOI,R.id.account,R.id.private_map,R.id.privatePOI,R.id.login)
