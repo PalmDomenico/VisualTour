@@ -18,8 +18,7 @@
             android:name="dd"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/green"
-            app:title="prova" />
+            android:background="@color/green"   />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -31,14 +30,5 @@
         android:layout_marginTop="56dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="297dp"
-        android:layout_height="34dp"
-        android:text="ss"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

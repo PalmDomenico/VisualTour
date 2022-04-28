@@ -1,9 +1,15 @@
 package com.example.VisualTour.Main;
 
 
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
+
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.Icon;
 import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import com.example.VisualTour.ArCustomizationActivity;
@@ -20,7 +27,8 @@ import com.example.VisualTour.POIActivity;
 import com.example.VisualTour.R;
 import com.example.VisualTour.RequestHttp;
 import com.example.VisualTour.databinding.HomeMappaBinding;
-import com.mapbox.android.core.location.LocationEngine;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+ import com.mapbox.android.core.location.LocationEngine;
 //import com.mapbox.android.core.location.LocationEngineListener;
 //import com.mapbox.android.core.location.LocationEnginePriority;
 import com.mapbox.android.core.location.LocationEngineCallback;
@@ -29,12 +37,15 @@ import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
+import com.mapbox.geojson.Feature;
+import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
+import com.mapbox.mapboxsdk.exceptions.IconBitmapChangedException;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.LocationComponentActivationOptions;
@@ -46,16 +57,21 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.locationlayer.LocationLayerPlugin;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 public class HomeMappa extends Fragment  implements OnMapReadyCallback, PermissionsListener {
 
     private MapView mapView;
@@ -78,9 +94,8 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
         Mapbox.getInstance(getContext().getApplicationContext(),getString(R.string.access_token));
         Mapbox.getInstance(getContext(), getString(R.string.access_token));
         binding = com.example.VisualTour.databinding.HomeMappaBinding.inflate(inflater, container, false);
-
-
-         mapView=binding.mapview;
+        //Style.Builder style=new Style.Builder().fromUrl("mapbox://styles/gnnsch/ckz6z0408002t15no7kxjxqew");
+ mapView=binding.mapview;
         mapView.onCreate(savedInstanceState);
 
         mapView.getMapAsync(this);
@@ -93,17 +108,50 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
         return binding.getRoot();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         HomeMappa.this.map = mapboxMap;
-
-        mapboxMap.setStyle(Style.OUTDOORS,
+        Style.Builder st=new Style.Builder().fromUri("mapbox://styles/gnnsch/cl1kd5iac000114lneuddy2l3");
+        mapboxMap.setStyle(st,
                 new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
+                        List<Feature> markerCoordinates = new ArrayList<>();
+                        markerCoordinates.add(Feature.fromGeometry(
+                                Point.fromLngLat(-71.065634, 42.354950))); // Boston Common Park
+                        markerCoordinates.add(Feature.fromGeometry(
+                                Point.fromLngLat(-71.097293, 42.346645))); // Fenway Park
+                        markerCoordinates.add(Feature.fromGeometry(
+                                Point.fromLngLat(-71.053694, 42.363725))); // The Paul Revere House
+
+                        style.addSource(new GeoJsonSource("marker-source",
+                                FeatureCollection.fromFeatures(markerCoordinates)));
+
+// Add the marker image to map
+                        style.addImage("my-marker-image", BitmapFactory.decodeResource(
+                                HomeMappa.this.getResources(), R.drawable.gf));
+
+// Adding an offset so that the bottom of the blue icon gets fixed to the coordinate, rather than the
+// middle of the icon being fixed to the coordinate point.
+                        style.addLayer(new SymbolLayer("marker-layer", "marker-source")
+                                .withProperties(PropertyFactory.iconImage("my-marker-image"),
+                                        iconAllowOverlap(true),
+                                        iconOffset(new Float[]{0f, -9f})));
+
+// Add the selected marker source and layer
+                        style.addSource(new GeoJsonSource("selected-marker"));
+
+// Adding an offset so that the bottom of the blue icon gets fixed to the coordinate, rather than the
+// middle of the icon being fixed to the coordinate point.
+                        style.addLayer(new SymbolLayer("selected-marker-layer", "selected-marker")
+                                .withProperties(PropertyFactory.iconImage("my-marker-image"),
+                                        iconAllowOverlap(true),
+                                        iconOffset(new Float[]{0f, -9f})));
                         enableLocationComponent(style);
                     }
                 });
+
         RequestHttp rq=new RequestHttp();
         String str=null;
         Map<String, String> request = new HashMap<>();
@@ -116,9 +164,11 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
         Map<Marker,Point> coordinates =new HashMap<>();
          Marker marker;
         for(int i=0; i< jArray.length();i++){
+             marker= map.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(jArray.getJSONObject(i).getString("Latitudine")),Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
+            int icon= com.mapbox.mapboxsdk.R.drawable.mapbox_compass_icon;
 
-            marker= map.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(jArray.getJSONObject(i).getString("Latitudine")),Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
             marker.setTitle(jArray.getJSONObject(i).getString("Nome"));
+             //marker.setIcon();
             coordinates.put(marker, Point.fromLngLat(marker.getPosition().getLongitude(),marker.getPosition().getLatitude()));
 
         }      } catch (IOException | JSONException e) {

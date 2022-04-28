@@ -8,19 +8,27 @@
         <item
             android:id="@+id/homeMappa"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Mappa" />
+            android:title="Mappa"
+            android:fontFamily="@font/oceanwide_semibold"
+            />
         <item
             android:id="@+id/login"
             android:icon="@drawable/ic_menu_account"
-            android:title="Profilo" />
+            android:title="Profilo"
+            android:fontFamily="@font/oceanwide_semibold"
+            />
         <item
             android:id="@+id/publicMap"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Percorsi" />
+            android:title="Percorsi"
+            android:fontFamily="@font/oceanwide_semibold"
+            />
         <item
             android:id="@+id/publicPOI"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Punti di interesse"
-             />
+            android:fontFamily="@font/oceanwide_semibold"
+
+            />
     </group>
 </menu>

@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar(). setDisplayShowCustomEnabled(true);
 
         getSupportActionBar().setTitle("wffffffffffff");
+        getSupportActionBar().show();
 
 
 

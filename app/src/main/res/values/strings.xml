@@ -32,7 +32,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="button">Button</string>
-    <string name="access_token">pk.eyJ1IjoiZG9tZW5pY29wYWxtaXNhbm8iLCJhIjoiY2t6b2hkNTV5MzlyZzJub2N0ZXk3eWg0YyJ9.oOKVZzPQZvonPDWPtu-LVg</string>
+    <string name="access_token">pk.eyJ1IjoiZ25uc2NoIiwiYSI6ImNsMml0eHo0NjBxaDAzYnA5NzVoa2lsMzYifQ.k6uKatTXrpTv45gCQolGWA</string>
     <string name="Mappa" />
     <string name="mappa" />
     <string name="course_rating" />

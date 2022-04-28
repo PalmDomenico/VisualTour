@@ -15,7 +15,7 @@
         mapbox:layout_constraintEnd_toEndOf="parent"
         mapbox:layout_constraintStart_toStartOf="parent"
         mapbox:layout_constraintTop_toTopOf="parent"
-        />
+       />
 
     <ImageView
         android:id="@+id/imageView"
