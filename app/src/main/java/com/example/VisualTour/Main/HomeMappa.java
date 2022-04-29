@@ -116,59 +116,30 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
         HomeMappa.this.map = mapboxMap;
          Style.Builder st=new Style.Builder().fromUri("mapbox://styles/gnnsch/cl1kd5iac000114lneuddy2l3");
         mapboxMap.setStyle(st,
-                new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-                        List<Feature> markerCoordinates = new ArrayList<>();
+                style -> {
+                    List<Feature> markerCoordinates = new ArrayList<>();
+                    RequestHttp rq=new RequestHttp();
+                    String str=null;
+                    Map<String, String> request = new HashMap<>();
+                    try {
+                        str= rq.richiesta(null,"POI");
+                        jArray = (JSONArray) new JSONTokener(str).nextValue();
+                        Map<Marker,Point> coordinates =new HashMap<>();
+                        Marker marker;
+                        for(int i=0; i< jArray.length();i++){
+                            marker= map.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(
+                                    jArray.getJSONObject(i).getString("Latitudine")),
+                                    Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
+                            marker.setTitle(jArray.getJSONObject(i).getString("Nome"));
+                            marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
+                            //marker.setIcon();
+                            coordinates.put(marker, Point.fromLngLat(marker.getPosition().getLongitude(),marker.getPosition().getLatitude()));
 
-                         RequestHttp rq=new RequestHttp();
-                        String str=null;
-                        Map<String, String> request = new HashMap<>();
-
-                        try {
-                            str= rq.richiesta(null,"POI");
-
-
-                            jArray = (JSONArray) new JSONTokener(str).nextValue();
-                            Map<Marker,Point> coordinates =new HashMap<>();
-                            Marker marker;
-                            for(int i=0; i< jArray.length();i++){
-                                marker= map.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(jArray.getJSONObject(i).getString("Latitudine")),Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
-
-                                marker.setTitle(jArray.getJSONObject(i).getString("Nome"));
-                                marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
-                                //marker.setIcon();
-                                coordinates.put(marker, Point.fromLngLat(marker.getPosition().getLongitude(),marker.getPosition().getLatitude()));
-
-                            }      } catch (IOException | JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                         style.addSource(new GeoJsonSource("marker-source",
-                                FeatureCollection.fromFeatures(markerCoordinates)));
-
-// Add the marker image to map
-                        style.addImage("my-marker-image", BitmapFactory.decodeResource(
-                                HomeMappa.this.getResources(), R.drawable.marker));
-
-// Adding an offset so that the bottom of the blue icon gets fixed to the coordinate, rather than the
-// middle of the icon being fixed to the coordinate point.
-                        style.addLayer(new SymbolLayer("marker-layer", "marker-source")
-                                .withProperties(PropertyFactory.iconImage("my-marker-image"),
-                                        iconAllowOverlap(true),
-                                        iconOffset(new Float[]{0f, -1f})));
-
-// Add the selected marker source and layer
-                        style.addSource(new GeoJsonSource("selected-marker"));
-
-// Adding an offset so that the bottom of the blue icon gets fixed to the coordinate, rather than the
-// middle of the icon being fixed to the coordinate point.
-                        style.addLayer(new SymbolLayer("selected-marker-layer", "selected-marker")
-                                .withProperties(PropertyFactory.iconImage("my-marker-image"),
-                                        iconAllowOverlap(true),
-                                        iconOffset(new Float[]{0f, -1f})));
-                        enableLocationComponent(style);
+                        }      } catch (IOException | JSONException e) {
+                        e.printStackTrace();
                     }
+
+                    enableLocationComponent(style);
                 });
 
     }
