@@ -11,15 +11,28 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/Theme.Login.AppBarOverlay">
-
+        tools:ignore="MissingConstraints">
+        <androidx.constraintlayout.widget.ConstraintLayout     android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:name="dd"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/green"   />
+            android:background="@android:color/transparent"   />
 
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VISUAL TOUR"
+                android:fontFamily="@font/oceanwide_semibold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <include

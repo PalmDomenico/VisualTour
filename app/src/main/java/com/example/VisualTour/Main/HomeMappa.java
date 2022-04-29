@@ -116,31 +116,28 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
         HomeMappa.this.map = mapboxMap;
          Style.Builder st=new Style.Builder().fromUri("mapbox://styles/gnnsch/cl1kd5iac000114lneuddy2l3");
         mapboxMap.setStyle(st,
-                style -> {
-                    List<Feature> markerCoordinates = new ArrayList<>();
-                    RequestHttp rq=new RequestHttp();
-                    String str=null;
-                    Map<String, String> request = new HashMap<>();
-                    try {
-                        str= rq.richiesta(null,"POI");
-                        jArray = (JSONArray) new JSONTokener(str).nextValue();
-                        Map<Marker,Point> coordinates =new HashMap<>();
-                        Marker marker;
-                        for(int i=0; i< jArray.length();i++){
-                            marker= map.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(
-                                    jArray.getJSONObject(i).getString("Latitudine")),
-                                    Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
-                            marker.setTitle(jArray.getJSONObject(i).getString("Nome"));
-                            marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
-                            //marker.setIcon();
-                            coordinates.put(marker, Point.fromLngLat(marker.getPosition().getLongitude(),marker.getPosition().getLatitude()));
-
-                        }      } catch (IOException | JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    enableLocationComponent(style);
-                });
+            style -> {
+                List<Feature> markerCoordinates = new ArrayList<>();
+                RequestHttp rq=new RequestHttp();
+                String str=null;
+                Map<String, String> request = new HashMap<>();
+                try {
+                    str= rq.richiesta(null,"POI");
+                    jArray = (JSONArray) new JSONTokener(str).nextValue();
+                    Map<Marker,Point> coordinates =new HashMap<>();
+                    Marker marker;
+                    for(int i=0; i< jArray.length();i++){
+                        marker= map.addMarker(new MarkerOptions().position(new LatLng(
+                                Double.parseDouble(jArray.getJSONObject(i).getString("Latitudine")),
+                                Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
+                        marker.setTitle(jArray.getJSONObject(i).getString("Nome"));
+                        marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
+                        coordinates.put(marker, Point.fromLngLat(marker.getPosition().getLongitude(),marker.getPosition().getLatitude()));
+                    }      } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+                enableLocationComponent(style);
+            });
 
     }
     Location lastlocation;

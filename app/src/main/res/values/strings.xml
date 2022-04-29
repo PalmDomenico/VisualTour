@@ -40,5 +40,7 @@
     <string name="my_new_title">My new title</string>
     <string name="this_is_the_hello_world_application">This is the Hello World Application</string>
     <string name="mytitle">{myTitle}</string>
+
+    <string name="testing2">Testing2</string>
     <string name="textview">TextView</string>
 </resources>
