@@ -7,7 +7,7 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/homeMappa"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu"
             android:title="Mappa"
             android:fontFamily="@font/oceanwide_semibold"
             />
@@ -19,13 +19,13 @@
             />
         <item
             android:id="@+id/publicMap"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_percorsi"
             android:title="Percorsi"
             android:fontFamily="@font/oceanwide_semibold"
             />
         <item
             android:id="@+id/publicPOI"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/ic_poi"
             android:title="Punti di interesse"
             android:fontFamily="@font/oceanwide_semibold"
 
