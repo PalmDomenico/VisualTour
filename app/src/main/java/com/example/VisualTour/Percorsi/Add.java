@@ -31,6 +31,7 @@ import com.mapbox.api.directions.v5.models.DirectionsResponse;
 import com.mapbox.api.directions.v5.models.DirectionsRoute;
 import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -92,7 +93,8 @@ public class Add extends Fragment implements OnMapReadyCallback, PermissionsList
         binding = AddpercorsiBinding.inflate(inflater, container, false);
         bindingperc = DettailsPercorsiBinding.inflate(inflater, container, false);
 
-        Mapbox.getInstance(getContext().getApplicationContext(),"sk.eyJ1IjoiZG9tZW5pY29wYWxtaXNhbm8iLCJhIjoiY2wwYmR4aHNwMGpnNjNrcXNybGV4azA1cCJ9.uHzjcddM-CIK2gTJzr-9vA");
+        Mapbox.getInstance(getContext().getApplicationContext(), getString(R.string.access_token)
+        );
 
         mapView = binding.mapview;
         mapView.onCreate(savedInstanceState);
@@ -173,6 +175,7 @@ public class Add extends Fragment implements OnMapReadyCallback, PermissionsList
 
                     marker= map.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(jArray.getJSONObject(i).getString("Latitudine")),Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
                     marker.setTitle(jArray.getJSONObject(i).getString("NomePunto"));
+                    marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
                     coordinates.put(marker,Point.fromLngLat(marker.getPosition().getLongitude(),marker.getPosition().getLatitude()));
                     if(i==0){
                         SetCameraPosition(marker);
@@ -393,8 +396,9 @@ public class Add extends Fragment implements OnMapReadyCallback, PermissionsList
     public void onMapReady(MapboxMap mapboxMap) {
         map=mapboxMap;
         Add.this.map = mapboxMap;
+        Style.Builder st=new Style.Builder().fromUri("mapbox://styles/gnnsch/cl1kd5iac000114lneuddy2l3");
 
-        mapboxMap.setStyle(Style.OUTDOORS,
+        mapboxMap.setStyle(st,
                 new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
@@ -412,6 +416,7 @@ public class Add extends Fragment implements OnMapReadyCallback, PermissionsList
                 jArray.getJSONObject(i).getString("Nome");
                 marker= map.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(jArray.getJSONObject(i).getString("Latitudine")),Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
                 marker.setTitle(jArray.getJSONObject(i).getString("Nome"));
+                marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
                 coordinates.put(marker,Point.fromLngLat(marker.getPosition().getLongitude(),marker.getPosition().getLatitude()));
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(marker.getPosition().getLatitude() ,
                         marker.getPosition().getLongitude()),13.0));

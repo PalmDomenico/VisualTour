@@ -18,6 +18,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.VisualTour.Main.HomeMappa;
+import com.example.VisualTour.R;
 import com.example.VisualTour.RequestHttp;
 import com.example.VisualTour.databinding.DetailsPoiBinding;
 import com.mapbox.android.core.location.LocationEngine;
@@ -29,6 +30,7 @@ import com.mapbox.android.core.location.LocationEngineResult;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.IconFactory;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -69,7 +71,7 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DetailsPoiBinding.inflate(inflater, container, false);
         sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
-        Mapbox.getInstance(getContext().getApplicationContext(), "sk.eyJ1IjoiZG9tZW5pY29wYWxtaXNhbm8iLCJhIjoiY2wwYmR4aHNwMGpnNjNrcXNybGV4azA1cCJ9.uHzjcddM-CIK2gTJzr-9vA");
+        Mapbox.getInstance(getContext().getApplicationContext(), getString(R.string.access_token));
 
 
         binding.DettagliModificaPOI.dettagliView.setVisibility(View.INVISIBLE);
@@ -95,6 +97,7 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
                     marker.remove();
                 }
                 marker=map.addMarker(markerOptions.position(new LatLng(lastlocation.getLatitude(), lastlocation.getLongitude())));
+                marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
             }
 
         });
@@ -278,8 +281,8 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
     public void onMapReady(MapboxMap mapboxMap) {
         map=mapboxMap;
         DetailsPOI.this.map = mapboxMap;
-
-        mapboxMap.setStyle(Style.OUTDOORS,
+        Style.Builder st=new Style.Builder().fromUri("mapbox://styles/gnnsch/cl1kd5iac000114lneuddy2l3");
+        mapboxMap.setStyle(st,
                 new Style.OnStyleLoaded() {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
@@ -310,13 +313,14 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
                 MarkerOptions markerOptions=new MarkerOptions();
                 marker.remove();
                 marker=map.addMarker(markerOptions.position(point));
+                marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
             }else if(OriginRequest.equals("New")){
                 MarkerOptions markerOptions=new MarkerOptions();
                 if(marker!=null){
                     marker.remove();
                 }
                 marker=map.addMarker(markerOptions.position(point));
-
+                marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
             }
             return false;
         });
@@ -334,6 +338,7 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
 
             map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon)),13.0));
             marker=map.addMarker(markerOptions.position(new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon))));
+            marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
         }
 
      }
