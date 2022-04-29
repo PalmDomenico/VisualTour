@@ -28,13 +28,13 @@
 
     <Button
         android:id="@+id/Disconetti"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
         android:layout_marginBottom="33dp"
-        android:backgroundTint="@android:color/white"
+        android:backgroundTint="@color/green"
         android:text="Disconnect"
         android:fontFamily="@font/oceanwide_semibold"
-        android:textColor="@color/green"
+        android:textColor="@color/white"
         android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

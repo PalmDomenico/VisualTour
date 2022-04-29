@@ -68,7 +68,7 @@
         android:id="@+id/Registrazione"
         android:layout_width="340dp"
         android:layout_height="60dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="61dp"
         android:backgroundTint="@color/green"
         android:fontFamily="@font/oceanwide_semibold"
         android:text="Sign Up"

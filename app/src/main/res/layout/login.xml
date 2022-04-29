@@ -65,7 +65,7 @@
         android:id="@+id/Login"
         android:layout_width="340dp"
         android:layout_height="60dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="140dp"
         android:backgroundTint="@color/green"
         android:fontFamily="@font/oceanwide_semibold"
         android:text="Sing in"
@@ -86,7 +86,7 @@
         android:textSize="12dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Login" />
 
