@@ -144,18 +144,31 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
 
     @SuppressWarnings( {"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
-// Check if permissions are enabled and if not request
+
+        LocationComponentOptions customLocationComponentOptions = LocationComponentOptions.builder(getContext())
+                .foregroundDrawable(R.drawable.marker).backgroundDrawable(R.drawable.)
+                .build();
+
+        LocationComponent locationComponent = map.getLocationComponent();
+        locationComponent.activateLocationComponent(
+                LocationComponentActivationOptions.builder(getContext(), loadedMapStyle)
+                        .locationComponentOptions(customLocationComponentOptions)
+                        .build());
+        locationComponent.setLocationComponentEnabled(true);
+
+
+        // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(getContext())) {
-// Get an instance of the component
-            LocationComponent locationComponent = map.getLocationComponent();
-// Activate with options
-            locationComponent.activateLocationComponent(
-            LocationComponentActivationOptions.builder(getContext(), loadedMapStyle).build());
+
+           // locationComponent.activateLocationComponent(
+            // LocationComponentActivationOptions.builder(getContext(), loadedMapStyle).build());
 
 // Enable to make component visible
-            locationComponent.setLocationComponentEnabled(true);
-  // Set the component's camera mode
+    // Set the component's camera mode
             locationComponent.setCameraMode(CameraMode.TRACKING_GPS);
+
+
+
             locationComponent.getLocationEngine().getLastLocation(new LocationEngineCallback<LocationEngineResult>() {
                 @Override
                 public void onSuccess(LocationEngineResult result) {
@@ -173,7 +186,7 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
 
 
 // Set the component's rendCameraUpdateFactoryer mode
-            locationComponent.setRenderMode(RenderMode.COMPASS);
+             locationComponent.setRenderMode(RenderMode.COMPASS);
         } else {
             permissionsManager = new PermissionsManager(this);
             permissionsManager.requestLocationPermissions(getActivity());
