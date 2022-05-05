@@ -1,6 +1,9 @@
 package com.example.VisualTour.Main;
 
+ import android.content.pm.PackageInfo;
+ import android.content.pm.PackageManager;
  import android.graphics.drawable.ColorDrawable;
+ import android.os.Build;
  import android.os.Bundle;
 
  import com.example.VisualTour.POI.privatePOI;
@@ -14,6 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import android.os.StrictMode;
  import android.view.MenuItem;
 
+ import androidx.core.content.ContextCompat;
  import androidx.drawerlayout.widget.DrawerLayout;
  import androidx.fragment.app.Fragment;
  import androidx.navigation.NavController;
@@ -64,8 +68,45 @@ public class MainActivity extends AppCompatActivity {
          NavigationUI.setupWithNavController(navigationView, navController);//attiva i bottoni nella barra
          StrictMode.ThreadPolicy gfgPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(gfgPolicy);
+
+        if (!allPermissionsGranted() && Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(getRequiredPermissions(), PERMISSIONS_REQUEST_CODE);
+        }
+    }
+    private static final int PERMISSIONS_REQUEST_CODE = 123;
+    private static final String PERMISSION_FOREGROUND_SERVICE = "android.permission.FOREGROUND_SERVICE";
+
+    protected boolean allPermissionsGranted() {
+        for (String permission : getRequiredPermissions()) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                // PERMISSION_FOREGROUND_SERVICE was added for targetSdkVersion >= 28, it is normal and always granted, but should be added to the Manifest file
+                // on devices with Android < P(9) checkSelfPermission(PERMISSION_FOREGROUND_SERVICE) can return PERMISSION_DENIED, but in fact it is GRANTED, so skip it
+                // https://developer.android.com/guide/components/services#Foreground
+                if (permission.equals(PERMISSION_FOREGROUND_SERVICE)) {
+                    continue;
+                }
+                return false;
+            }
+        }
+        return true;
     }
 
+    private String[] getRequiredPermissions() {
+        String[] permissions;
+        try {
+            PackageInfo info = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_PERMISSIONS);
+            String[] requestedPermissions = info.requestedPermissions;
+            if (requestedPermissions != null && requestedPermissions.length > 0) {
+                permissions = requestedPermissions;
+            } else {
+                permissions = new String[]{};
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            permissions = new String[]{};
+        }
+
+        return permissions;
+    }
 
 
 

@@ -3,6 +3,7 @@ package com.example.VisualTour.Main;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -90,16 +92,26 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Mapbox.getInstance(getContext().getApplicationContext(),getString(R.string.access_token));
         Mapbox.getInstance(getContext(), getString(R.string.access_token));
         binding = com.example.VisualTour.databinding.HomeMappaBinding.inflate(inflater, container, false);
-        //Style.Builder style=new Style.Builder().fromUrl("mapbox://styles/gnnsch/ckz6z0408002t15no7kxjxqew");
- mapView=binding.mapview;
-        mapView.onCreate(savedInstanceState);
 
+
+        View view = inflater.inflate(R.layout.home_mappa, container, false);
+        binding.mapview.getRenderView().setOnTouchListener((v, event) -> {
+            if(event.getAction() == MotionEvent.ACTION_DOWN){
+                centra();
+                System.out.println("prova");
+            }
+
+            return false;
+        });
+        mapView=binding.mapview;
+        mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
         binding.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,15 +150,30 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
                 }
                 enableLocationComponent(style);
             });
+        map.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                centra();
+            }
+        });
+        binding.centra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                centraCamera( latitudine, longitudine);
+                binding.centra.setVisibility(View.INVISIBLE);
+            }
+        });
+        binding.centra.setVisibility(View.INVISIBLE);
 
     }
     Location lastlocation;
-
+    private void centra(){
+        binding.centra.setVisibility(View.VISIBLE);
+     }
     @SuppressWarnings( {"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
 
         LocationComponentOptions customLocationComponentOptions = LocationComponentOptions.builder(getContext())
-                .foregroundDrawable(R.drawable.marker).backgroundDrawable(R.drawable.)
                 .build();
 
         LocationComponent locationComponent = map.getLocationComponent();
@@ -181,18 +208,23 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
                 }
             });
             map.moveCamera(CameraUpdateFactory.tiltTo(1000));
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastlocation.getLatitude() ,
-                    lastlocation.getLongitude()),16.5),1000);
+            latitudine=lastlocation.getLatitude();
+            longitudine=lastlocation.getLongitude();
 
+            centraCamera( latitudine, longitudine);
 
-// Set the component's rendCameraUpdateFactoryer mode
              locationComponent.setRenderMode(RenderMode.COMPASS);
         } else {
             permissionsManager = new PermissionsManager(this);
             permissionsManager.requestLocationPermissions(getActivity());
         }
     }
-
+    private void centraCamera(double latitudine, double longitudine){
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitudine ,
+                longitudine),16.5),1000);
+    }
+    double latitudine;
+    double longitudine;
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         permissionsManager.onRequestPermissionsResult(requestCode, permissions, grantResults);
