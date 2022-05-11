@@ -3,8 +3,10 @@ package com.example.VisualTour.Main;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.VisualTour.ArCustomizationActivity;
@@ -31,7 +34,7 @@ import com.example.VisualTour.RequestHttp;
 import com.example.VisualTour.databinding.HomeMappaBinding;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
- import com.mapbox.android.core.location.LocationEngine;
+import com.mapbox.android.core.location.LocationEngine;
 //import com.mapbox.android.core.location.LocationEngineListener;
 //import com.mapbox.android.core.location.LocationEnginePriority;
 import com.mapbox.android.core.location.LocationEngineCallback;
@@ -74,9 +77,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
-public class HomeMappa extends Fragment  implements OnMapReadyCallback, PermissionsListener {
+
+public class HomeMappa extends Fragment implements OnMapReadyCallback, PermissionsListener {
 
     private MapView mapView;
     private HomeMappaBinding binding;
@@ -88,29 +93,29 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
     private Location originlocation;
     private static JSONArray jArray = null;
 
-    public HomeMappa(){
+    public HomeMappa() {
 
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
     @Override
-        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        Mapbox.getInstance(getContext().getApplicationContext(),getString(R.string.access_token));
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        Mapbox.getInstance(getContext().getApplicationContext(), getString(R.string.access_token));
         Mapbox.getInstance(getContext(), getString(R.string.access_token));
         binding = com.example.VisualTour.databinding.HomeMappaBinding.inflate(inflater, container, false);
 
 
         View view = inflater.inflate(R.layout.home_mappa, container, false);
         binding.mapview.getRenderView().setOnTouchListener((v, event) -> {
-            if(event.getAction() == MotionEvent.ACTION_DOWN){
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
                 centra();
                 System.out.println("prova");
             }
 
             return false;
         });
-        mapView=binding.mapview;
+        mapView = binding.mapview;
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
         binding.imageView.setOnClickListener(new View.OnClickListener() {
@@ -126,30 +131,31 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {
         HomeMappa.this.map = mapboxMap;
-         Style.Builder st=new Style.Builder().fromUri("mapbox://styles/gnnsch/cl1kd5iac000114lneuddy2l3");
+        Style.Builder st = new Style.Builder().fromUri("mapbox://styles/gnnsch/cl1kd5iac000114lneuddy2l3");
         mapboxMap.setStyle(st,
-            style -> {
-                List<Feature> markerCoordinates = new ArrayList<>();
-                RequestHttp rq=new RequestHttp();
-                String str=null;
-                Map<String, String> request = new HashMap<>();
-                try {
-                    str= rq.richiesta(null,"POI");
-                    jArray = (JSONArray) new JSONTokener(str).nextValue();
-                    Map<Marker,Point> coordinates =new HashMap<>();
-                    Marker marker;
-                    for(int i=0; i< jArray.length();i++){
-                        marker= map.addMarker(new MarkerOptions().position(new LatLng(
-                                Double.parseDouble(jArray.getJSONObject(i).getString("Latitudine")),
-                                Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
-                        marker.setTitle(jArray.getJSONObject(i).getString("Nome"));
-                        marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
-                        coordinates.put(marker, Point.fromLngLat(marker.getPosition().getLongitude(),marker.getPosition().getLatitude()));
-                    }      } catch (IOException | JSONException e) {
-                    e.printStackTrace();
-                }
-                enableLocationComponent(style);
-            });
+                style -> {
+                    List<Feature> markerCoordinates = new ArrayList<>();
+                    RequestHttp rq = new RequestHttp();
+                    String str = null;
+                    Map<String, String> request = new HashMap<>();
+                    try {
+                        str = rq.richiesta(null, "POI");
+                        jArray = (JSONArray) new JSONTokener(str).nextValue();
+                        Map<Marker, Point> coordinates = new HashMap<>();
+                        Marker marker;
+                        for (int i = 0; i < jArray.length(); i++) {
+                            marker = map.addMarker(new MarkerOptions().position(new LatLng(
+                                    Double.parseDouble(jArray.getJSONObject(i).getString("Latitudine")),
+                                    Double.parseDouble(jArray.getJSONObject(i).getString("Longitudine")))));
+                            marker.setTitle(jArray.getJSONObject(i).getString("Nome"));
+                            marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
+                            coordinates.put(marker, Point.fromLngLat(marker.getPosition().getLongitude(), marker.getPosition().getLatitude()));
+                        }
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                    enableLocationComponent(style);
+                });
         map.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
@@ -159,24 +165,28 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
         binding.centra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                centraCamera( latitudine, longitudine);
+                centraCamera();
                 binding.centra.setVisibility(View.INVISIBLE);
             }
         });
         binding.centra.setVisibility(View.INVISIBLE);
 
     }
+
+    LocationComponent locationComponent;
     Location lastlocation;
-    private void centra(){
+
+    private void centra() {
         binding.centra.setVisibility(View.VISIBLE);
-     }
-    @SuppressWarnings( {"MissingPermission"})
+    }
+
+    @SuppressWarnings({"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
 
         LocationComponentOptions customLocationComponentOptions = LocationComponentOptions.builder(getContext())
                 .build();
 
-        LocationComponent locationComponent = map.getLocationComponent();
+        locationComponent = map.getLocationComponent();
         locationComponent.activateLocationComponent(
                 LocationComponentActivationOptions.builder(getContext(), loadedMapStyle)
                         .locationComponentOptions(customLocationComponentOptions)
@@ -187,19 +197,19 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
         // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(getContext())) {
 
-           // locationComponent.activateLocationComponent(
+            // locationComponent.activateLocationComponent(
             // LocationComponentActivationOptions.builder(getContext(), loadedMapStyle).build());
 
 // Enable to make component visible
-    // Set the component's camera mode
+            // Set the component's camera mode
             locationComponent.setCameraMode(CameraMode.TRACKING_GPS);
-
 
 
             locationComponent.getLocationEngine().getLastLocation(new LocationEngineCallback<LocationEngineResult>() {
                 @Override
                 public void onSuccess(LocationEngineResult result) {
-                      lastlocation=result.getLastLocation();
+                    lastlocation = result.getLastLocation();
+
                 }
 
                 @Override
@@ -208,26 +218,47 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
                 }
             });
             map.moveCamera(CameraUpdateFactory.tiltTo(1000));
-            latitudine=lastlocation.getLatitude();
-            longitudine=lastlocation.getLongitude();
+            latitudine = lastlocation.getLatitude();
+            longitudine = lastlocation.getLongitude();
 
-            centraCamera( latitudine, longitudine);
+            centraCamera();
+            locationComponent.setRenderMode(RenderMode.COMPASS);
 
-             locationComponent.setRenderMode(RenderMode.COMPASS);
         } else {
             permissionsManager = new PermissionsManager(this);
             permissionsManager.requestLocationPermissions(getActivity());
         }
     }
 
+    @SuppressLint("MissingPermission")
+    public void getLocationEngine() {
+        final LocationEngineResult locationEngineResult;
+        locationComponent.getLocationEngine().getLastLocation(new LocationEngineCallback<LocationEngineResult>() {
+            @Override
+            public void onSuccess(LocationEngineResult result) {
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(result.getLastLocation().getLatitude() ,
+                        result.getLastLocation().getLongitude()),16.5),1000);
+            }
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+
+            }
+        });
+
+    }
+
+    public Location getOriginlocation() {
+        return originlocation;
+    }
+
     public Location getLastLocation() {
         return lastLocation;
     }
 
-    private void centraCamera(double latitudine, double longitudine){
-        Location location=getLastLocation();
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude() ,
-                location.getLongitude()),16.5),1000);
+    private void centraCamera(){
+
+        getLocationEngine();
+
     }
     double latitudine;
     double longitudine;
