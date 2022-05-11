@@ -219,9 +219,15 @@ public class HomeMappa extends Fragment  implements OnMapReadyCallback, Permissi
             permissionsManager.requestLocationPermissions(getActivity());
         }
     }
+
+    public Location getLastLocation() {
+        return lastLocation;
+    }
+
     private void centraCamera(double latitudine, double longitudine){
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitudine ,
-                longitudine),16.5),1000);
+        Location location=getLastLocation();
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(location.getLatitude() ,
+                location.getLongitude()),16.5),1000);
     }
     double latitudine;
     double longitudine;
