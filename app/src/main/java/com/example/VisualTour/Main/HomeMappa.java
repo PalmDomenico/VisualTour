@@ -156,12 +156,7 @@ public class HomeMappa extends Fragment implements OnMapReadyCallback, Permissio
                     }
                     enableLocationComponent(style);
                 });
-        map.addOnCameraMoveListener(new MapboxMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
-                centra();
-            }
-        });
+
         binding.centra.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -177,7 +172,7 @@ public class HomeMappa extends Fragment implements OnMapReadyCallback, Permissio
     Location lastlocation;
 
     private void centra() {
-        binding.centra.setVisibility(View.VISIBLE);
+             binding.centra.setVisibility(View.VISIBLE);
     }
 
     @SuppressWarnings({"MissingPermission"})
@@ -197,14 +192,8 @@ public class HomeMappa extends Fragment implements OnMapReadyCallback, Permissio
         // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(getContext())) {
 
-            // locationComponent.activateLocationComponent(
-            // LocationComponentActivationOptions.builder(getContext(), loadedMapStyle).build());
 
-// Enable to make component visible
-            // Set the component's camera mode
             locationComponent.setCameraMode(CameraMode.TRACKING_GPS);
-
-
             locationComponent.getLocationEngine().getLastLocation(new LocationEngineCallback<LocationEngineResult>() {
                 @Override
                 public void onSuccess(LocationEngineResult result) {
@@ -218,6 +207,7 @@ public class HomeMappa extends Fragment implements OnMapReadyCallback, Permissio
                 }
             });
             map.moveCamera(CameraUpdateFactory.tiltTo(1000));
+
             latitudine = lastlocation.getLatitude();
             longitudine = lastlocation.getLongitude();
 
@@ -238,6 +228,7 @@ public class HomeMappa extends Fragment implements OnMapReadyCallback, Permissio
             public void onSuccess(LocationEngineResult result) {
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(result.getLastLocation().getLatitude() ,
                         result.getLastLocation().getLongitude()),16.5),1000);
+
             }
             @Override
             public void onFailure(@NonNull Exception exception) {
@@ -258,6 +249,7 @@ public class HomeMappa extends Fragment implements OnMapReadyCallback, Permissio
     private void centraCamera(){
 
         getLocationEngine();
+        binding.centra.setVisibility(View.INVISIBLE);
 
     }
     double latitudine;

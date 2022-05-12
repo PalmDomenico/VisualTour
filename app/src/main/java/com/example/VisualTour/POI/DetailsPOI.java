@@ -84,7 +84,6 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
         if(OriginRequest.equals("New")){
             binding.Invia.setVisibility(View.VISIBLE);
             binding.Posizione.setVisibility(View.VISIBLE);
-
             nuovo();
         }else{
             binding.Posizione.setVisibility(View.INVISIBLE);
@@ -163,18 +162,10 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
     private void nuovo(){
         binding.DettagliModificaPOI.dettagliView.setVisibility(View.VISIBLE);
         binding.DettagliDatiPOI.getRoot().setVisibility((View.INVISIBLE));
-        setTextBox();
-    }
+     }
 
 
-    private void setTextBox(){//setta il testo nelle textbox
-        binding.DettagliModificaPOI.textName.setText(binding.DettagliDatiPOI.NomeMon.getText());
-        binding.DettagliModificaPOI.textTipo.setText(binding.DettagliDatiPOI.TipoMon.getText());
-        binding.DettagliModificaPOI.textComune.setText(binding.DettagliDatiPOI.ComuneMon.getText());
-        binding.DettagliModificaPOI.textProvincia.setText(binding.DettagliDatiPOI.ProvinciaMon.getText());
-        binding.DettagliModificaPOI.textRegione.setText(binding.DettagliDatiPOI.RegioneMon.getText());
-        binding.DettagliModificaPOI.textDescrizione.setText(binding.DettagliDatiPOI.DescrizioneMon.getText());
-    }
+
     private void setTextViewMod(){
         binding.DettagliDatiPOI.NomeMon.setText(binding.DettagliModificaPOI.textName.getText().toString());
         binding.DettagliDatiPOI.TipoMon.setText(binding.DettagliModificaPOI.textTipo.getText().toString());
@@ -189,8 +180,7 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
         binding.Modifica.setVisibility(View.INVISIBLE);
         binding.DettagliModificaPOI.dettagliView.setVisibility(View.VISIBLE);
         binding.DettagliDatiPOI.getRoot().setVisibility((View.INVISIBLE));
-        setTextBox();
-        binding.Invia.setVisibility(View.VISIBLE);
+         binding.Invia.setVisibility(View.VISIBLE);
         binding.Posizione.setVisibility(View.VISIBLE);
 
     }
@@ -314,6 +304,7 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
                 marker.remove();
                 marker=map.addMarker(markerOptions.position(point));
                 marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
+
             }else if(OriginRequest.equals("New")){
                 MarkerOptions markerOptions=new MarkerOptions();
                 if(marker!=null){
@@ -321,7 +312,7 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
                 }
                 marker=map.addMarker(markerOptions.position(point));
                 marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
-            }
+             }
             return false;
         });
     }
@@ -333,10 +324,13 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
     Marker marker=null;
 
     private  void setCameraPosition(String Lat, String Lon){
+        map.moveCamera(CameraUpdateFactory.tiltTo(1000));
+
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon)),16.0));
+
         if(!OriginRequest.equals("New")){
             MarkerOptions markerOptions=new MarkerOptions();
 
-            map.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon)),13.0));
             marker=map.addMarker(markerOptions.position(new LatLng(Double.parseDouble(Lat), Double.parseDouble(Lon))));
             marker.setIcon((IconFactory.getInstance(getContext()).fromResource(R.drawable.marker)));
         }
@@ -346,7 +340,7 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
 
-         map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 13.0));
+         map.animateCamera(CameraUpdateFactory.newLatLngZoom(point, 16.0));
 
         return false;
     }
@@ -371,6 +365,10 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
                 @Override
                 public void onSuccess(LocationEngineResult result) {
                     lastlocation=result.getLastLocation();
+                    if(OriginRequest.equals("New")){
+
+                        setCameraPosition(  String.valueOf(lastlocation.getLatitude()) ,String.valueOf(lastlocation.getLongitude()));
+                    }
                 }
 
                 @Override
@@ -379,10 +377,9 @@ public class DetailsPOI extends Fragment implements OnMapReadyCallback, Permissi
                 }
             });
 
-// Set the component's camera mode
+
             locationComponent.setCameraMode(CameraMode.TRACKING);
-// Set the component's render mode
-            locationComponent.setRenderMode(RenderMode.COMPASS);
+             locationComponent.setRenderMode(RenderMode.COMPASS);
         } else {
             permissionsManager = new PermissionsManager(this);
             permissionsManager.requestLocationPermissions(getActivity());

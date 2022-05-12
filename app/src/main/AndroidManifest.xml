@@ -32,18 +32,21 @@
             android:name=".POIActivity"
              android:screenOrientation="landscape">
         </activity>
+        <activity
+
+            android:name=".Main.start"
+             android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
             <activity
                 android:name="com.example.VisualTour.Main.MainActivity"
-                android:exported="true"
-                android:theme="@style/Theme.Login.NoActionBar"
+                 android:theme="@style/Theme.Login.NoActionBar">
 
-                >
 
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN" />
-
-                    <category android:name="android.intent.category.LAUNCHER" />
-                </intent-filter>
             </activity>
         </application>
 

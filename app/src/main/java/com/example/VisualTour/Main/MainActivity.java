@@ -1,5 +1,6 @@
 package com.example.VisualTour.Main;
 
+ import android.content.Intent;
  import android.content.pm.PackageInfo;
  import android.content.pm.PackageManager;
  import android.graphics.drawable.ColorDrawable;
@@ -14,7 +15,8 @@ import com.google.android.material.navigation.NavigationView;
  import androidx.appcompat.app.ActionBar;
  import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.StrictMode;
+ import android.os.Handler;
+ import android.os.StrictMode;
  import android.view.MenuItem;
 
  import androidx.core.content.ContextCompat;
